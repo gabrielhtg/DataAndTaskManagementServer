@@ -2,6 +2,8 @@ package gabrielhtg.repository;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class TCPServerRepositoryImpl implements TCPServerRepository{
@@ -24,6 +26,25 @@ public class TCPServerRepositoryImpl implements TCPServerRepository{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean cekUsername(String username) {
+        String sql = String.format("SELECT * FROM nama_tabel WHERE kolom LIKE %s;", username);
+        try {
+            PreparedStatement statement = koneksi.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            String data = null;
+            while (resultSet.next()) {
+                data = resultSet.getString("kolom");
+                System.out.println(data);
+            }
+
+        } catch (SQLException e) {
+            return false; // false jika username tidak ditemukan
+        }
+        return true; // true ketika username ditemukan
+
     }
     
 }

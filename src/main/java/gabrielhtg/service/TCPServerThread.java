@@ -19,14 +19,19 @@ public class TCPServerThread extends Thread {
         String outputSentence;
         TCPServerRepository repo = new TCPServerRepositoryImpl();
         TCPServerServiceImpl service = new TCPServerServiceImpl();
-        repo.buatKoneksi("jdbc:mysql://127.0.0.1:3306", "root", "agustus163");
+        repo.buatKoneksi("jdbc:mysql://127.0.0.1:3306/userdata", "root", "agustus163");
 
         try{
             BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
             DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
             String namaClient = service.decode(inFromClient.readLine());
-            System.out.println("Client " + namaClient + " mencoba terhubung.");
+            
+            // memeriksa apakah user ada di database atau tidak
+            if (repo.cekUsername(namaClient) == false) {
+                System.out.println("User tidak ditemukan");
+            }
 
+            System.out.println("Client " + namaClient + " mencoba terhubung.");
             
             while((clientSentence = inFromClient.readLine()) != null){
                 if (clientSentence.equals("/notes")) {
