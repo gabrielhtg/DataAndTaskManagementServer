@@ -1,8 +1,6 @@
 package gabrielhtg.service;
 import java.net.*;
 
-import com.github.tomaslanger.chalk.Chalk;
-
 import gabrielhtg.repository.TCPServerRepository;
 import gabrielhtg.repository.TCPServerRepositoryImpl;
 

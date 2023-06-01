@@ -34,4 +34,17 @@ public class TCPServerServiceImpl implements TCPServerService{
                     "  - /help --> untuk menampilkan help\n" + 
                     "  - /exit --> untuk exit";
     }
+
+    @Override
+    public void buatGaris (int n) {
+        for (int i = 0; i < n; i++) {
+            System.out.print("-");
+        }
+        System.out.println();
+    }
+        
+    @Override
+    public void buatGaris () {
+        System.out.println("-------------------------------------------");
+    }
 }
