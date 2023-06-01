@@ -47,7 +47,7 @@ public class TCPServerThread extends Thread {
                 }
 
                 else {
-                    outputSentence = String.format("Input kamu tidak tepat.\n%s", service.kirimHelp(namaClient));
+                    outputSentence = String.format("Input kamu tidak tepat. Ketikkan /help", service.kirimHelp(namaClient));
                 }
 
                 System.out.println("dari " + namaClient + " : " + clientSentence);
