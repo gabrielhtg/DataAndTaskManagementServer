@@ -163,7 +163,7 @@ public class TCPServerRepository{
         return note;
     }
 
-    public boolean cobaLogin (String username, String password) {
+    public String getPassword (String username) {
         String query = String.format("select password from user where username = '%s'", username);
         PreparedStatement statement;
         try {
@@ -171,13 +171,12 @@ public class TCPServerRepository{
             ResultSet resultSet = statement.executeQuery();
             
             if (resultSet.next()) {
-                if (password.equals(resultSet.getString("password"))) {
-                    return true;
-                }
+                return resultSet.getString("password");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+
+        return null;
     }
 }

@@ -46,13 +46,17 @@ public class TCPServerThread extends Thread {
 
             else {
                 outToClient.writeBytes(service.encode("true"));
-                String password = service.decode(inFromClient.readLine());
+                String passwordDatabase = repo.getPassword(namaClient);
+                String passwordDariClient = "";
+                // passwordDariClient = service.decode(inFromClient.readLine());
+                // outToClient.writeBytes(service.encode("false"));
                 
-                if (repo.cobaLogin(namaClient, password)) {
-                    outToClient.writeBytes(service.encode("true"));
-                }
-
-                else {
+                while (true) {
+                    passwordDariClient = service.decode(inFromClient.readLine());
+                    if (passwordDatabase.equals(passwordDariClient)) {
+                        outToClient.writeBytes(service.encode("true"));
+                        break;
+                    }
                     outToClient.writeBytes(service.encode("false"));
                 }
             }
