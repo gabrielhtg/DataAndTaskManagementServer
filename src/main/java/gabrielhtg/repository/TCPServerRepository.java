@@ -70,7 +70,8 @@ public class TCPServerRepository{
     }
 
     public boolean insertNote (String namaNote, String isiNote, String username) {
-        String sql =  String.format("UPDATE user SET notes = CONCAT(notes, '|%s'), notename = CONCAT(notename, '|%s') WHERE username = '%s'", namaNote, isiNote, username);
+        String sql = String.format("INSERT INTO data (notename, notes, username) VALUES ('%s', '%s', '%s')", namaNote, isiNote, username);
+
         PreparedStatement statement;
         try {
             statement = koneksi.prepareStatement(sql);
@@ -86,6 +87,61 @@ public class TCPServerRepository{
             return false;
         }
 
+        return true;
+    }
+
+    public boolean isEmpty (String username) {
+        String query = String.format("SELECT notes FROM user WHERE username = '%s'", username);
+        PreparedStatement statement;
+        try {
+            statement = koneksi.prepareStatement(query);
+
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                String notes = resultSet.getString("notes");
+                if (notes != null && !notes.isEmpty()) {
+                    return false;
+                } else {
+                    return true;
+                }
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
+    public String showNote (String username) {
+        StringBuilder temp = new StringBuilder();
+        String query = String.format("SELECT notename FROM data WHERE username = '%s'", username);
+        PreparedStatement statement;
+        try {
+            statement = koneksi.prepareStatement(query);
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                String notename = resultSet.getString("notename");
+                temp.append(String.format("  - %s\n", notename));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return temp.toString();
+    }
+
+    public boolean removeNote (String username, String notename) {
+        String query = String.format("DELETE FROM data WHERE username = '%s' AND notename = '%s'", username, notename);
+        PreparedStatement statement;
+        try {
+            statement = koneksi.prepareStatement(query);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        
         return true;
     }
 }

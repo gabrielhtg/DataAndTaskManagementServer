@@ -50,7 +50,7 @@ public class TCPServerThread extends Thread {
 
             while((clientSentence = inFromClient.readLine()) != null){
                 if (clientSentence.equals("/notes")) {
-                    outputSentence = String.format("Berikut ini adalah list note yang tersedia untuk %s", namaClient);
+                    outputSentence = String.format("Berikut ini adalah list note yang tersedia untuk %s\n  %s", namaClient, repo.showNote(namaClient).trim());
                 }
 
                 else if (clientSentence.equals("/exit")) {
@@ -72,6 +72,18 @@ public class TCPServerThread extends Thread {
 
                     else {
                         outputSentence = "Gagal menambah note. Note " + namaNote + " sudah ada.";
+                    }
+                }
+
+                else if (clientSentence.equals("/remove")) {
+                    String namaNote = service.decode(inFromClient.readLine());
+
+                    if (repo.removeNote(namaClient, namaNote)) {
+                        outputSentence = "Berhasil menghapus note " + namaNote;
+                    }
+
+                    else {
+                        outputSentence = "Gagal menghapus note. Note " + namaNote + " tidak ditemukan.";
                     }
                 }
 

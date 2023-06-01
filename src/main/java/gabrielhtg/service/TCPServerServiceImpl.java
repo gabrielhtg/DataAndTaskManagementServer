@@ -30,9 +30,10 @@ public class TCPServerServiceImpl implements TCPServerService{
     @Override
     public String kirimHelp(String namaClient) {
         return "/help untuk " + namaClient + "\n" +
-                    "  - /notes --> untuk menampilkan notes\n" + 
-                    "  - /help --> untuk menampilkan help\n" + 
-                    "  - /exit --> untuk exit";
+                    "  - /notes --> menampilkan notes\n" + 
+                    "  - /help --> menampilkan help\n" + 
+                    "  - /save --> menyimpan note baru\n" + 
+                    "  - /exit --> exit";
     }
 
     @Override
