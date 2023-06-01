@@ -162,4 +162,22 @@ public class TCPServerRepository{
         
         return note;
     }
+
+    public boolean cobaLogin (String username, String password) {
+        String query = String.format("select password from user where username = '%s'", username);
+        PreparedStatement statement;
+        try {
+            statement = koneksi.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+            
+            if (resultSet.next()) {
+                if (password.equals(resultSet.getString("password"))) {
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

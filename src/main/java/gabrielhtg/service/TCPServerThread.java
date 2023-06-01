@@ -46,6 +46,15 @@ public class TCPServerThread extends Thread {
 
             else {
                 outToClient.writeBytes(service.encode("true"));
+                String password = service.decode(inFromClient.readLine());
+                
+                if (repo.cobaLogin(namaClient, password)) {
+                    outToClient.writeBytes(service.encode("true"));
+                }
+
+                else {
+                    outToClient.writeBytes(service.encode("false"));
+                }
             }
 
             while((clientSentence = inFromClient.readLine()) != null){
@@ -64,8 +73,14 @@ public class TCPServerThread extends Thread {
 
                 else if (clientSentence.charAt(0) == '#') {
                     int panjang = repo.getNote(namaClient, clientSentence.split("#")[1]).length();
-                    System.out.println(repo.getNote(namaClient, clientSentence.split("#")[1]).substring(0, panjang - 5));
-                    outputSentence = repo.getNote(namaClient, clientSentence.split("#")[1]).substring(0, panjang - 5);
+                    
+                    if (panjang != 0) {
+                        outputSentence = repo.getNote(namaClient, clientSentence.split("#")[1]).substring(0, panjang - 5);
+                    }
+
+                    else {
+                        outputSentence = String.format("Note %s tidak ditemukan.", clientSentence.split("#")[1]);
+                    }
                 }
 
                 else if (clientSentence.equals("/save")) {
