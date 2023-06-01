@@ -1,0 +1,13 @@
+digraph "gabrielhtg:DataAndTaskManagement:jar:1.0" { 
+	"gabrielhtg:DataAndTaskManagement:jar:1.0" -> "org.junit.jupiter:junit-jupiter:jar:5.9.3:compile" ; 
+	"gabrielhtg:DataAndTaskManagement:jar:1.0" -> "org.fusesource.jansi:jansi:jar:2.4.0:compile" ; 
+	"gabrielhtg:DataAndTaskManagement:jar:1.0" -> "com.mysql:mysql-connector-j:jar:8.0.33:compile" ; 
+	"org.junit.jupiter:junit-jupiter:jar:5.9.3:compile" -> "org.junit.jupiter:junit-jupiter-api:jar:5.9.3:compile" ; 
+	"org.junit.jupiter:junit-jupiter:jar:5.9.3:compile" -> "org.junit.jupiter:junit-jupiter-params:jar:5.9.3:compile" ; 
+	"org.junit.jupiter:junit-jupiter:jar:5.9.3:compile" -> "org.junit.jupiter:junit-jupiter-engine:jar:5.9.3:runtime" ; 
+	"org.junit.jupiter:junit-jupiter-api:jar:5.9.3:compile" -> "org.opentest4j:opentest4j:jar:1.2.0:compile" ; 
+	"org.junit.jupiter:junit-jupiter-api:jar:5.9.3:compile" -> "org.junit.platform:junit-platform-commons:jar:1.9.3:compile" ; 
+	"org.junit.jupiter:junit-jupiter-api:jar:5.9.3:compile" -> "org.apiguardian:apiguardian-api:jar:1.1.2:compile" ; 
+	"org.junit.jupiter:junit-jupiter-engine:jar:5.9.3:runtime" -> "org.junit.platform:junit-platform-engine:jar:1.9.3:runtime" ; 
+	"com.mysql:mysql-connector-j:jar:8.0.33:compile" -> "com.google.protobuf:protobuf-java:jar:3.21.9:compile" ; 
+ } 
