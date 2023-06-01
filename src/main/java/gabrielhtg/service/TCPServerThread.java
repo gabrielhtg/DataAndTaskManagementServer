@@ -40,16 +40,16 @@ public class TCPServerThread extends Thread {
                     System.out.printf("%s disconnected\n", namaClient);
                     outToClient.writeBytes(service.encode(outputSentence));
                     outToClient.flush();
+                    repo.tutupKoneksi();
                     break;
                 }
 
                 else if (clientSentence.equals("/help")) {
-                    outputSentence = String.format("/help untuk %s\n  - /notes --> untuk menampilkan notes\n  - /exit --> untuk exit", namaClient);
-
+                    outputSentence = service.kirimHelp(namaClient);
                 }
 
                 else {
-                    outputSentence = String.format("Input kamu tidak tepat.\n/help untuk %s\n  - /notes --> untuk menampilkan notes\n  - /exit --> untuk exit", namaClient);
+                    outputSentence = String.format("Input kamu tidak tepat.\n%s", service.kirimHelp(namaClient));
                 }
 
                 System.out.println("dari " + namaClient + " : " + clientSentence);

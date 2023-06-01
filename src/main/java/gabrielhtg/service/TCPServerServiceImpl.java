@@ -26,4 +26,12 @@ public class TCPServerServiceImpl implements TCPServerService{
             }
         } catch (IOException | InterruptedException ex) {}
     }
+
+    @Override
+    public String kirimHelp(String namaClient) {
+        return "/help untuk " + namaClient + "\n" +
+                    "  - /notes --> untuk menampilkan notes\n" + 
+                    "  - /help --> untuk menampilkan help\n" + 
+                    "  - /exit --> untuk exit";
+    }
 }
