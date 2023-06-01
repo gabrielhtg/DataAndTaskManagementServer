@@ -31,6 +31,7 @@ public class TCPServerThread extends Thread {
             // memeriksa apakah user ada di database atau tidak
             if (repo.cekUsername(namaClient) == false) {
                 System.out.printf("User %s tidak ditemukan\n", namaClient);
+                System.out.flush();
                 outToClient.writeBytes(service.encode("false"));
                 String newPassword = service.decode(inFromClient.readLine()).trim();
 
@@ -64,8 +65,8 @@ public class TCPServerThread extends Thread {
                 else if (clientSentence.equals("/save")) {
                     String namaNote = service.decode(inFromClient.readLine());
                     String isiNote = service.decode(inFromClient.readLine());
-                    
-                    if (repo.insertNote(namaNote, isiNote)) {
+
+                    if (repo.insertNote(namaNote, isiNote, namaClient)) {
                         outputSentence = "Berhasil menambahkan note " + namaNote;
                     }
 

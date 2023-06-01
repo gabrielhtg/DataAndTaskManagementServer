@@ -27,7 +27,7 @@ public class TCPServerRepository{
     }
 
     public boolean cekUsername(String username) {
-        String sql = String.format("SELECT * FROM user WHERE username LIKE '%s'", username);
+        String sql = String.format("SELECT * FROM user WHERE username = '%s'", username);
         try {
             PreparedStatement statement = koneksi.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
@@ -35,6 +35,10 @@ public class TCPServerRepository{
             while (resultSet.next()) {
                 data = resultSet.getString("username");
                 System.out.println(data);
+            }
+
+            if (data == null) {
+                return false;
             }
 
         } catch (SQLException e) {
@@ -65,8 +69,8 @@ public class TCPServerRepository{
         return true;
     }
 
-    public boolean insertNote (String namaNote, String isiNote) {
-        String sql =  String.format("INSERT INTO user (note, notename) VALUES ('%s', '%s')", "|" + isiNote, "|" + namaNote);
+    public boolean insertNote (String namaNote, String isiNote, String username) {
+        String sql =  String.format("UPDATE user SET notes = CONCAT(notes, '|%s'), notename = CONCAT(notename, '|%s') WHERE username = '%s'", namaNote, isiNote, username);
         PreparedStatement statement;
         try {
             statement = koneksi.prepareStatement(sql);
