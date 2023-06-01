@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.*;
 import java.util.Enumeration;
 
+import gabrielhtg.service.TCPServerService;
 import gabrielhtg.service.TCPServerServiceImpl;
 import gabrielhtg.service.TCPServerThread;
 
@@ -25,7 +26,10 @@ public class TCPServerMultiClient {
             }
 
             TCPServerServiceImpl.clearScreen();
+            TCPServerService service = new TCPServerServiceImpl();
+            service.buatGaris(60);
             System.out.printf("IP Address : %s\n", ipAddress);
+            service.buatGaris(60);
         } catch (SocketException e) {
             e.printStackTrace();
         }
