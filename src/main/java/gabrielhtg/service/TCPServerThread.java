@@ -1,6 +1,8 @@
 package gabrielhtg.service;
 import java.net.*;
 
+import com.github.tomaslanger.chalk.Chalk;
+
 import gabrielhtg.repository.TCPServerRepository;
 import gabrielhtg.repository.TCPServerRepositoryImpl;
 
@@ -31,10 +33,7 @@ public class TCPServerThread extends Thread {
             while((clientSentence = inFromClient.readLine()) != null){
                 if (clientSentence.equals("/notes")) {
                     outputSentence = String.format("Berikut ini adalah list note yang tersedia untuk %s", namaClient);
-
-                    outToClient.write(outputSentence.getBytes());
-                    outToClient.flush();
-                    // nanti disini cek dari database
+                    outToClient.writeBytes(service.encode(outputSentence));
                 }
 
                 else if (clientSentence.equals("/exit")) {
@@ -50,7 +49,7 @@ public class TCPServerThread extends Thread {
                 }
 
                 else {
-                    outputSentence = String.format("Input kamu tidak dapat dikenali.\n/help untuk %s\n  - /notes --> untuk menampilkan notes\n  - /exit --> untuk exit", namaClient);
+                    outputSentence = String.format("Input kamu tidak tepat.\n/help untuk %s\n  - /notes --> untuk menampilkan notes\n  - /exit --> untuk exit", namaClient);
                 }
 
                 System.out.println("dari " + namaClient + " : " + clientSentence);

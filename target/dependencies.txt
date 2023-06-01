@@ -1,7 +1,9 @@
-digraph "gabrielhtg:DataAndTaskManagement:jar:1.0" { 
-	"gabrielhtg:DataAndTaskManagement:jar:1.0" -> "org.junit.jupiter:junit-jupiter:jar:5.9.3:compile" ; 
-	"gabrielhtg:DataAndTaskManagement:jar:1.0" -> "org.fusesource.jansi:jansi:jar:2.4.0:compile" ; 
-	"gabrielhtg:DataAndTaskManagement:jar:1.0" -> "com.mysql:mysql-connector-j:jar:8.0.33:compile" ; 
+digraph "gabrielhtg:DataAndTaskManagementServer:jar:1.0" { 
+	"gabrielhtg:DataAndTaskManagementServer:jar:1.0" -> "org.junit.jupiter:junit-jupiter:jar:5.9.3:compile" ; 
+	"gabrielhtg:DataAndTaskManagementServer:jar:1.0" -> "com.zaxxer:HikariCP:jar:5.0.1:compile" ; 
+	"gabrielhtg:DataAndTaskManagementServer:jar:1.0" -> "org.fusesource.jansi:jansi:jar:2.4.0:compile" ; 
+	"gabrielhtg:DataAndTaskManagementServer:jar:1.0" -> "com.mysql:mysql-connector-j:jar:8.0.33:compile" ; 
+	"gabrielhtg:DataAndTaskManagementServer:jar:1.0" -> "com.github.tomas-langer:chalk:jar:1.0.2:compile" ; 
 	"org.junit.jupiter:junit-jupiter:jar:5.9.3:compile" -> "org.junit.jupiter:junit-jupiter-api:jar:5.9.3:compile" ; 
 	"org.junit.jupiter:junit-jupiter:jar:5.9.3:compile" -> "org.junit.jupiter:junit-jupiter-params:jar:5.9.3:compile" ; 
 	"org.junit.jupiter:junit-jupiter:jar:5.9.3:compile" -> "org.junit.jupiter:junit-jupiter-engine:jar:5.9.3:runtime" ; 
@@ -9,5 +11,48 @@ digraph "gabrielhtg:DataAndTaskManagement:jar:1.0" {
 	"org.junit.jupiter:junit-jupiter-api:jar:5.9.3:compile" -> "org.junit.platform:junit-platform-commons:jar:1.9.3:compile" ; 
 	"org.junit.jupiter:junit-jupiter-api:jar:5.9.3:compile" -> "org.apiguardian:apiguardian-api:jar:1.1.2:compile" ; 
 	"org.junit.jupiter:junit-jupiter-engine:jar:5.9.3:runtime" -> "org.junit.platform:junit-platform-engine:jar:1.9.3:runtime" ; 
+	"com.zaxxer:HikariCP:jar:5.0.1:compile" -> "org.slf4j:slf4j-api:jar:2.0.0-alpha1:compile" ; 
 	"com.mysql:mysql-connector-j:jar:8.0.33:compile" -> "com.google.protobuf:protobuf-java:jar:3.21.9:compile" ; 
+	"com.github.tomas-langer:chalk:jar:1.0.2:compile" -> "org.fusesource.hawtjni:hawtjni-runtime:jar:1.11:compile" ; 
+	"com.github.tomas-langer:chalk:jar:1.0.2:compile" -> "org.fusesource.jansi:jansi-native:jar:1.5:compile" ; 
+	"com.github.tomas-langer:chalk:jar:1.0.2:compile" -> "org.fusesource.jansi:jansi-native:jar:windows32:1.5:runtime" ; 
+	"com.github.tomas-langer:chalk:jar:1.0.2:compile" -> "org.fusesource.jansi:jansi-native:jar:windows64:1.5:runtime" ; 
+ } digraph "gabrielhtg:DataAndTaskManagementServer:jar:1.0" { 
+	"gabrielhtg:DataAndTaskManagementServer:jar:1.0" -> "org.junit.jupiter:junit-jupiter:jar:5.9.3:compile" ; 
+	"gabrielhtg:DataAndTaskManagementServer:jar:1.0" -> "com.zaxxer:HikariCP:jar:5.0.1:compile" ; 
+	"gabrielhtg:DataAndTaskManagementServer:jar:1.0" -> "org.fusesource.jansi:jansi:jar:2.4.0:compile" ; 
+	"gabrielhtg:DataAndTaskManagementServer:jar:1.0" -> "com.mysql:mysql-connector-j:jar:8.0.33:compile" ; 
+	"gabrielhtg:DataAndTaskManagementServer:jar:1.0" -> "com.github.tomas-langer:chalk:jar:1.0.2:compile" ; 
+	"org.junit.jupiter:junit-jupiter:jar:5.9.3:compile" -> "org.junit.jupiter:junit-jupiter-api:jar:5.9.3:compile" ; 
+	"org.junit.jupiter:junit-jupiter:jar:5.9.3:compile" -> "org.junit.jupiter:junit-jupiter-params:jar:5.9.3:compile" ; 
+	"org.junit.jupiter:junit-jupiter:jar:5.9.3:compile" -> "org.junit.jupiter:junit-jupiter-engine:jar:5.9.3:runtime" ; 
+	"org.junit.jupiter:junit-jupiter-api:jar:5.9.3:compile" -> "org.opentest4j:opentest4j:jar:1.2.0:compile" ; 
+	"org.junit.jupiter:junit-jupiter-api:jar:5.9.3:compile" -> "org.junit.platform:junit-platform-commons:jar:1.9.3:compile" ; 
+	"org.junit.jupiter:junit-jupiter-api:jar:5.9.3:compile" -> "org.apiguardian:apiguardian-api:jar:1.1.2:compile" ; 
+	"org.junit.jupiter:junit-jupiter-engine:jar:5.9.3:runtime" -> "org.junit.platform:junit-platform-engine:jar:1.9.3:runtime" ; 
+	"com.zaxxer:HikariCP:jar:5.0.1:compile" -> "org.slf4j:slf4j-api:jar:2.0.0-alpha1:compile" ; 
+	"com.mysql:mysql-connector-j:jar:8.0.33:compile" -> "com.google.protobuf:protobuf-java:jar:3.21.9:compile" ; 
+	"com.github.tomas-langer:chalk:jar:1.0.2:compile" -> "org.fusesource.hawtjni:hawtjni-runtime:jar:1.11:compile" ; 
+	"com.github.tomas-langer:chalk:jar:1.0.2:compile" -> "org.fusesource.jansi:jansi-native:jar:1.5:compile" ; 
+	"com.github.tomas-langer:chalk:jar:1.0.2:compile" -> "org.fusesource.jansi:jansi-native:jar:windows32:1.5:runtime" ; 
+	"com.github.tomas-langer:chalk:jar:1.0.2:compile" -> "org.fusesource.jansi:jansi-native:jar:windows64:1.5:runtime" ; 
+ } digraph "gabrielhtg:DataAndTaskManagementServer:jar:1.0" { 
+	"gabrielhtg:DataAndTaskManagementServer:jar:1.0" -> "org.junit.jupiter:junit-jupiter:jar:5.9.3:compile" ; 
+	"gabrielhtg:DataAndTaskManagementServer:jar:1.0" -> "com.zaxxer:HikariCP:jar:5.0.1:compile" ; 
+	"gabrielhtg:DataAndTaskManagementServer:jar:1.0" -> "org.fusesource.jansi:jansi:jar:2.4.0:compile" ; 
+	"gabrielhtg:DataAndTaskManagementServer:jar:1.0" -> "com.mysql:mysql-connector-j:jar:8.0.33:compile" ; 
+	"gabrielhtg:DataAndTaskManagementServer:jar:1.0" -> "com.github.tomas-langer:chalk:jar:1.0.2:compile" ; 
+	"org.junit.jupiter:junit-jupiter:jar:5.9.3:compile" -> "org.junit.jupiter:junit-jupiter-api:jar:5.9.3:compile" ; 
+	"org.junit.jupiter:junit-jupiter:jar:5.9.3:compile" -> "org.junit.jupiter:junit-jupiter-params:jar:5.9.3:compile" ; 
+	"org.junit.jupiter:junit-jupiter:jar:5.9.3:compile" -> "org.junit.jupiter:junit-jupiter-engine:jar:5.9.3:runtime" ; 
+	"org.junit.jupiter:junit-jupiter-api:jar:5.9.3:compile" -> "org.opentest4j:opentest4j:jar:1.2.0:compile" ; 
+	"org.junit.jupiter:junit-jupiter-api:jar:5.9.3:compile" -> "org.junit.platform:junit-platform-commons:jar:1.9.3:compile" ; 
+	"org.junit.jupiter:junit-jupiter-api:jar:5.9.3:compile" -> "org.apiguardian:apiguardian-api:jar:1.1.2:compile" ; 
+	"org.junit.jupiter:junit-jupiter-engine:jar:5.9.3:runtime" -> "org.junit.platform:junit-platform-engine:jar:1.9.3:runtime" ; 
+	"com.zaxxer:HikariCP:jar:5.0.1:compile" -> "org.slf4j:slf4j-api:jar:2.0.0-alpha1:compile" ; 
+	"com.mysql:mysql-connector-j:jar:8.0.33:compile" -> "com.google.protobuf:protobuf-java:jar:3.21.9:compile" ; 
+	"com.github.tomas-langer:chalk:jar:1.0.2:compile" -> "org.fusesource.hawtjni:hawtjni-runtime:jar:1.11:compile" ; 
+	"com.github.tomas-langer:chalk:jar:1.0.2:compile" -> "org.fusesource.jansi:jansi-native:jar:1.5:compile" ; 
+	"com.github.tomas-langer:chalk:jar:1.0.2:compile" -> "org.fusesource.jansi:jansi-native:jar:windows32:1.5:runtime" ; 
+	"com.github.tomas-langer:chalk:jar:1.0.2:compile" -> "org.fusesource.jansi:jansi-native:jar:windows64:1.5:runtime" ; 
  } 
