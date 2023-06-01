@@ -2,7 +2,6 @@ package gabrielhtg.service;
 import java.net.*;
 
 import gabrielhtg.repository.TCPServerRepository;
-import gabrielhtg.repository.TCPServerRepositoryImpl;
 
 import java.io.*;
 
@@ -17,7 +16,7 @@ public class TCPServerThread extends Thread {
     public void run(){
         String clientSentence;
         String outputSentence;
-        TCPServerRepository repo = new TCPServerRepositoryImpl();
+        TCPServerRepository repo = new TCPServerRepository();
         TCPServerServiceImpl service = new TCPServerServiceImpl();
         repo.buatKoneksi("jdbc:mysql://127.0.0.1:3306/userdata", "root", "agustus163");
 
@@ -25,14 +24,23 @@ public class TCPServerThread extends Thread {
             BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
             DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
             String namaClient = service.decode(inFromClient.readLine());
+            System.out.println("Client " + namaClient + " mencoba terhubung.");
             
             // memeriksa apakah user ada di database atau tidak
             if (repo.cekUsername(namaClient) == false) {
-                System.out.println("User tidak ditemukan");
+                System.out.printf("User %s tidak ditemukan\n", namaClient);
+                outToClient.writeBytes(service.encode("false"));
+                String newPassword = service.decode(inFromClient.readLine()).trim();
+
+                if (repo.inputUser(namaClient, newPassword)) {
+                    outToClient.writeBytes(service.encode("true"));
+                }
+                
+                else {
+                    outToClient.writeBytes(service.encode("false"));
+                }
             }
 
-            System.out.println("Client " + namaClient + " mencoba terhubung.");
-            
             while((clientSentence = inFromClient.readLine()) != null){
                 if (clientSentence.equals("/notes")) {
                     outputSentence = String.format("Berikut ini adalah list note yang tersedia untuk %s", namaClient);
