@@ -1,5 +1,6 @@
 package gabrielhtg.service;
 import java.net.*;
+import java.util.Scanner;
 
 import gabrielhtg.repository.TCPServerRepository;
 
@@ -16,6 +17,7 @@ public class TCPServerThread extends Thread {
     public void run(){
         String clientSentence;
         String outputSentence;
+        Scanner scan = new Scanner(System.in);
         TCPServerRepository repo = new TCPServerRepository();
         TCPServerServiceImpl service = new TCPServerServiceImpl();
         repo.buatKoneksi("jdbc:mysql://127.0.0.1:3306/userdata", "root", "agustus163");
@@ -41,6 +43,10 @@ public class TCPServerThread extends Thread {
                 }
             }
 
+            else {
+                outToClient.writeBytes(service.encode("true"));
+            }
+
             while((clientSentence = inFromClient.readLine()) != null){
                 if (clientSentence.equals("/notes")) {
                     outputSentence = String.format("Berikut ini adalah list note yang tersedia untuk %s", namaClient);
@@ -53,6 +59,19 @@ public class TCPServerThread extends Thread {
                     outToClient.flush();
                     repo.tutupKoneksi();
                     break;
+                }
+
+                else if (clientSentence.equals("/save")) {
+                    String namaNote = service.decode(inFromClient.readLine());
+                    String isiNote = service.decode(inFromClient.readLine());
+                    
+                    if (repo.insertNote(namaNote, isiNote)) {
+                        outputSentence = "Berhasil menambahkan note " + namaNote;
+                    }
+
+                    else {
+                        outputSentence = "Gagal menambah note. Note " + namaNote + " sudah ada.";
+                    }
                 }
 
                 else if (clientSentence.equals("/help")) {
@@ -71,6 +90,8 @@ public class TCPServerThread extends Thread {
         } catch (Exception e){
             e.printStackTrace();
         }
+
+        scan.close();
     }
 }
 

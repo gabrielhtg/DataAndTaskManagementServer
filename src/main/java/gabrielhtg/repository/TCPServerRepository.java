@@ -27,17 +27,18 @@ public class TCPServerRepository{
     }
 
     public boolean cekUsername(String username) {
-        String sql = String.format("SELECT * FROM nama_tabel WHERE kolom LIKE %s;", username);
+        String sql = String.format("SELECT * FROM user WHERE username LIKE '%s'", username);
         try {
             PreparedStatement statement = koneksi.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
             String data = null;
             while (resultSet.next()) {
-                data = resultSet.getString("kolom");
+                data = resultSet.getString("username");
                 System.out.println(data);
             }
 
         } catch (SQLException e) {
+            e.printStackTrace();
             return false; // false jika username tidak ditemukan
         }
         return true; // true ketika username ditemukan
@@ -45,17 +46,39 @@ public class TCPServerRepository{
     }
     
     public boolean inputUser (String username, String password) {
-        String sql =  String.format("user (username, password, privatepath) VALUES (%s, %s, %s)", username, password, username + "/");
+        String sql =  String.format("INSERT INTO user (username, password, privatepath) VALUES ('%s', '%s', '%s')", username, password, username + "/");
         PreparedStatement statement;
         try {
             statement = koneksi.prepareStatement(sql);
         } catch (SQLException e) {
+            e.printStackTrace();
             return false;
         }
 
         try {
             statement.executeUpdate();
         } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean insertNote (String namaNote, String isiNote) {
+        String sql =  String.format("INSERT INTO user (note, notename) VALUES ('%s', '%s')", "|" + isiNote, "|" + namaNote);
+        PreparedStatement statement;
+        try {
+            statement = koneksi.prepareStatement(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        try {
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
             return false;
         }
 
