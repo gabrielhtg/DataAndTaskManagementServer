@@ -33,13 +33,13 @@ public class TCPServerThread extends Thread {
             while((clientSentence = inFromClient.readLine()) != null){
                 if (clientSentence.equals("/notes")) {
                     outputSentence = String.format("Berikut ini adalah list note yang tersedia untuk %s", namaClient);
-                    outToClient.writeBytes(service.encode(outputSentence));
                 }
 
                 else if (clientSentence.equals("/exit")) {
                     outputSentence = String.format("Koneksi kamu dengan server selesai.");
-                    outToClient.writeBytes(service.encode(outputSentence));
                     System.out.printf("%s disconnected\n", namaClient);
+                    outToClient.writeBytes(service.encode(outputSentence));
+                    outToClient.flush();
                     break;
                 }
 
