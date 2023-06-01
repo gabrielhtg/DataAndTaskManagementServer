@@ -39,7 +39,7 @@ public class TCPServerThread extends Thread {
                 else if (clientSentence.equals("/exit")) {
                     outputSentence = String.format("Koneksi kamu dengan server selesai.");
                     outToClient.writeBytes(service.encode(outputSentence));
-                    
+                    System.out.printf("%s disconnected\n", namaClient);
                     break;
                 }
 
