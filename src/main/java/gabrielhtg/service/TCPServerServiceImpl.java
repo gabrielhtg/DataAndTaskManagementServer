@@ -33,7 +33,9 @@ public class TCPServerServiceImpl implements TCPServerService{
                     "  - /notes --> menampilkan notes\n" + 
                     "  - /help --> menampilkan help\n" + 
                     "  - /save --> menyimpan note baru\n" + 
-                    "  - /exit --> exit";
+                    "  - /remove --> menghapus note\n" + 
+                    "  - /exit --> exit\n" +
+                    "  - untuk mendapatkan note ketikkan #notename" ;
     }
 
     @Override

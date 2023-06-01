@@ -62,6 +62,12 @@ public class TCPServerThread extends Thread {
                     break;
                 }
 
+                else if (clientSentence.charAt(0) == '#') {
+                    int panjang = repo.getNote(namaClient, clientSentence.split("#")[1]).length();
+                    System.out.println(repo.getNote(namaClient, clientSentence.split("#")[1]).substring(0, panjang - 5));
+                    outputSentence = repo.getNote(namaClient, clientSentence.split("#")[1]).substring(0, panjang - 5);
+                }
+
                 else if (clientSentence.equals("/save")) {
                     String namaNote = service.decode(inFromClient.readLine());
                     String isiNote = service.decode(inFromClient.readLine());

@@ -144,4 +144,22 @@ public class TCPServerRepository{
         
         return true;
     }
+
+    public String getNote (String username, String notename) {
+        String query = String.format("select notes from data where username = '%s' and notename = '%s'", username, notename);
+        String note = "";
+        PreparedStatement statement;
+        try {
+            statement = koneksi.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+            
+            if (resultSet.next()) {
+                note = resultSet.getString("notes");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return note;
+    }
 }
