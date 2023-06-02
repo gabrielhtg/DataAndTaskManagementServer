@@ -1,9 +1,6 @@
 package gabrielhtg.service;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.Socket;
 import java.util.Base64;
 
 public class TCPServerService{
